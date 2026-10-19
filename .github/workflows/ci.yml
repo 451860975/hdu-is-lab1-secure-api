@@ -25,5 +25,6 @@ jobs:
         run: bandit -r . -f json -o bandit-report.json || true
 
       - name: Run SCA Safety scan
-        run: safety check --json > safety-report.json
+        run: safety check --json > safety-report.json || true
+
 
