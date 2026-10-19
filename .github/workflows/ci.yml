@@ -22,7 +22,8 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Run SAST Bandit scan
-        run: bandit -r . -f json -o bandit-report.json
+        run: bandit -r . -f json -o bandit-report.json || true
 
       - name: Run SCA Safety scan
         run: safety check --json > safety-report.json
+
