@@ -10,7 +10,12 @@ Apache ActiveMQ contains an unauthenticated file server endpoint `/fileserver`. 
 1. Start the vulnerable environment with `docker-compose up -d`
 2. Use Postman to send PUT request to `http://127.0.0.1:8161/fileserver/test.txt`, the request body contains custom text.
 3. The server returns HTTP 204 No Content. The uploaded file can be directly accessed via browser, which proves the arbitrary file write vulnerability exists.
-(Screenshot: Vulnerability reproduction, Postman 204 response + browser preview of uploaded file)
+
+Postman result of vulnerable request:
+![Postman vulnerable test 204 response](postman_vuln.png)
+
+Browser preview of uploaded file:
+![Browser view of uploaded test.txt](browser_upload.png)
 
 ### Root-cause analysis
 The fileserver web application is enabled in jetty.xml by default without authentication. It accepts HTTP PUT requests and writes user-controllable content directly to the server disk. There is no filter to block executable script files.
@@ -22,3 +27,6 @@ Edit jetty.xml configuration file and comment out the entire fileserver webapp c
 After applying the patch:
 1. Send the same PUT upload request to `/fileserver` again. The server returns HTTP 404 Not Found. The file upload function is disabled.
 2. Regression test: Access ActiveMQ homepage `http://127.0.0.1:8161`. The web management page works normally, and the core message queue service is unaffected.
+
+Fix verification screenshot:
+![Fix verification 404 response](postman_fix.png)
