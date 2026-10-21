@@ -40,7 +40,7 @@ Every `git push` or pull request will trigger this workflow automatically.
 CI pipeline successful run screenshot:
 ![CI Actions Screenshot](ci_pipeline.png)
 
-> Link of last successful pipeline run: [https://github.com/451860975/hdu-is-lab1-secure-api/actions/runs/39362629270]
+> Link of last successful pipeline run: [https://github.com/451860975/hdu-is-lab1-secure-api/actions/runs/39534106225]
 
 ## Selected CVE: CVE‑2016‑3088 Apache ActiveMQ Arbitrary File Write Vulnerability
 ### Vulnerability description
